@@ -217,11 +217,12 @@ namespace F0.EditorConfig.DotNet.CSharp.Code
 				case Numeral numeral:
 					result = $"{numeral}({nameof(Numeral)})";
 					break;
+				case null:
+					result = "value is null";
+					break;
 				default:
 					result = "unknown value";
 					break;
-				case null:
-					throw new ArgumentNullException((nameof(value)));
 			}
 
 			return result;
@@ -274,13 +275,25 @@ namespace F0.EditorConfig.DotNet.CSharp.Code
 		}
 	}
 
-	public readonly struct MyStruct : IEquatable<MyStruct>
+	public struct MyStruct : IEquatable<MyStruct>
 	{
-		public double Number { get; }
+		public double Number { get; set; }
 
 		public MyStruct(double number)
 		{
 			Number = number;
+		}
+
+		public MyStruct(MyStruct other)
+		{
+			this = other;
+		}
+
+		public MyStruct Replace(MyStruct other)
+		{
+			MyStruct value = this;
+			this = other;
+			return value;
 		}
 
 		public bool Equals(MyStruct other)
@@ -290,7 +303,7 @@ namespace F0.EditorConfig.DotNet.CSharp.Code
 
 		public override bool Equals(object obj)
 		{
-			if (obj == null)
+			if (obj is null)
 			{
 				return false;
 			}
@@ -321,6 +334,53 @@ namespace F0.EditorConfig.DotNet.CSharp.Code
 		public override string ToString()
 		{
 			return $"{nameof(Number)}: {Number}";
+		}
+	}
+
+	public readonly struct ReadOnlyStruct : IEquatable<ReadOnlyStruct>
+	{
+		public byte Property1 { get; }
+		public byte Property2 { get; }
+
+		public ReadOnlyStruct(byte parameter1, byte parameter2)
+		{
+			Property1 = parameter1;
+			Property2 = parameter2;
+		}
+
+		public ReadOnlyStruct(ReadOnlyStruct other)
+		{
+			this = other;
+		}
+
+		public bool Equals(ReadOnlyStruct other)
+		{
+			return (Property1, Property2).Equals((other.Property1, other.Property2));
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is ReadOnlyStruct other && Equals(other);
+		}
+
+		public override int GetHashCode()
+		{
+			return (Property1, Property2).GetHashCode();
+		}
+
+		public static bool operator ==(ReadOnlyStruct left, ReadOnlyStruct right)
+		{
+			return left.Equals(right);
+		}
+
+		public static bool operator !=(ReadOnlyStruct left, ReadOnlyStruct right)
+		{
+			return !left.Equals(right);
+		}
+
+		public override string ToString()
+		{
+			return $"{nameof(Property1)}: {Property1}, {nameof(Property2)}: {Property2}";
 		}
 	}
 
