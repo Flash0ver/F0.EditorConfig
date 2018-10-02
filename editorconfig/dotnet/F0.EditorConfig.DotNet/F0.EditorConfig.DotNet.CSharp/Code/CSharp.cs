@@ -152,14 +152,29 @@ namespace F0.EditorConfig.DotNet.CSharp.Code
 			return (integer / 2) != 0;
 		}
 
+		public static string GetParity(int integer)
+		{
+			string parity = IsEven(integer) ? "even" : "odd";
+			return parity;
+		}
+
 		public static int Fibonacci(int value)
 		{
 			return fibonacci(value);
 
 			int fibonacci(int n)
 			{
-				return n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+				return (n <= 1) ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
 			}
+		}
+
+		public static bool DoMath(int a, int b, int c, bool y, bool z)
+		{
+			int d = a + (b * c);
+			bool x = (a < b) == (c > d);
+			bool v = x || (y && z);
+
+			return v;
 		}
 	}
 
@@ -328,7 +343,7 @@ namespace F0.EditorConfig.DotNet.CSharp.Code
 
 		public static bool operator !=(MyStruct left, MyStruct right)
 		{
-			return !(left.Equals(right));
+			return !left.Equals(right);
 		}
 
 		public override string ToString()
