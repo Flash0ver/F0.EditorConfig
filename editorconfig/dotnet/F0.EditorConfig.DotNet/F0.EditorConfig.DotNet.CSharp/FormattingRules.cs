@@ -140,7 +140,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 				{
 					goto error;
 				}
-				error:
+			error:
 				throw new Exception();
 			}
 		}
