@@ -83,12 +83,6 @@ namespace F0.EditorConfig.DotNet.CSharp
 			int v = a + (b * c);
 		}
 
-		public void Method(int a, int b, int c, int d)
-		{
-			// dotnet_style_parentheses_in_relational_binary_operators
-			bool v = (a < b) == (c > d);
-		}
-
 		public void Method(bool a, bool b, bool c)
 		{
 			// dotnet_style_parentheses_in_other_binary_operators
@@ -99,6 +93,12 @@ namespace F0.EditorConfig.DotNet.CSharp
 		{
 			// dotnet_style_parentheses_in_other_operators
 			dynamic v = a.b.Length;
+		}
+
+		public void Method(int a, int b, int c, int d)
+		{
+			// dotnet_style_parentheses_in_relational_binary_operators
+			bool v = (a < b) == (c > d);
 		}
 	}
 
@@ -279,37 +279,6 @@ namespace F0.EditorConfig.DotNet.CSharp
 	{
 		// csharp_prefer_simple_default_expression
 		private void DoWork(CancellationToken cancellationToken = default) { }
-
-		public ExpressionLevelPreferences()
-		{
-			// csharp_style_deconstructed_variable_declaration
-			(string name, int age) = GetPersonTuple();
-			Console.WriteLine($"{name} {age}");
-
-			(int x, int y) = GetPointTuple();
-			Console.WriteLine($"{x} {y}");
-		}
-
-		private static (string name, int age) GetPersonTuple()
-		{
-			return ("Name", 42);
-		}
-
-		private static (int x, int y) GetPointTuple()
-		{
-			return (1, 2);
-		}
-
-		public int Fibonacci(int value)
-		{
-			return fibonacci(value);
-
-			// csharp_style_pattern_local_over_anonymous_function
-			int fibonacci(int n)
-			{
-				return n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
-			}
-		}
 	}
 
 	internal class NullCheckingPreferences<T>
@@ -338,6 +307,40 @@ namespace F0.EditorConfig.DotNet.CSharp
 		private void Display()
 		{
 			throw new NotImplementedException();
+		}
+	}
+
+	internal class MiscellaneousPreferences
+	{
+		public MiscellaneousPreferences()
+		{
+			// csharp_style_deconstructed_variable_declaration
+			(string name, int age) = GetPersonTuple();
+			Console.WriteLine($"{name} {age}");
+
+			(int x, int y) = GetPointTuple();
+			Console.WriteLine($"{x} {y}");
+		}
+
+		private static (string name, int age) GetPersonTuple()
+		{
+			return ("Name", 42);
+		}
+
+		private static (int x, int y) GetPointTuple()
+		{
+			return (1, 2);
+		}
+
+		public int Fibonacci(int value)
+		{
+			return fibonacci(value);
+
+			// csharp_style_pattern_local_over_anonymous_function
+			int fibonacci(int n)
+			{
+				return n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+			}
 		}
 	}
 }

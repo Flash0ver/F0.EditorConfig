@@ -164,27 +164,11 @@ namespace F0.EditorConfig.DotNet.CSharp
 			for (int i = 0; i < x; i++)
 			{
 			}
-		}
-
-		// csharp_space_between_method_declaration_parameter_list_parentheses
-		private void Bark(int x)
-		{
-		}
-
-		private void Method(int argument, long x, long y)
-		{
-			// csharp_space_between_method_call_parameter_list_parentheses
-			MyMethod(argument);
 
 			// csharp_space_between_parentheses
 			for (int i = 0; i < 10; i++)
 			{
 			}
-
-			long z = (x * y) - ((y - x) * 3);
-
-			int w = (int)x;
-
 		}
 
 		// csharp_space_before_colon_in_inheritance_clause
@@ -205,10 +189,15 @@ namespace F0.EditorConfig.DotNet.CSharp
 			return x * (x - y);
 		}
 
+		// csharp_space_between_method_declaration_parameter_list_parentheses
+		private void Bark(int x)
+		{
+		}
+
 
 		// csharp_space_between_method_declaration_empty_parameter_list_parentheses
-		// csharp_space_between_method_call_name_and_opening_parenthesis
 		// csharp_space_between_method_call_empty_parameter_list_parentheses
+		// csharp_space_between_method_call_name_and_opening_parenthesis
 		private void Goo()
 		{
 			Goo(1);
@@ -217,6 +206,17 @@ namespace F0.EditorConfig.DotNet.CSharp
 		private void Goo(int x)
 		{
 			Goo();
+		}
+
+		private void Method(int argument, long x, long y)
+		{
+			// csharp_space_between_method_call_parameter_list_parentheses
+			MyMethod(argument);
+
+			long z = (x * y) - ((y - x) * 3);
+
+			int w = (int)x;
+
 		}
 
 
