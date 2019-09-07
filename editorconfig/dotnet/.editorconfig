@@ -12,7 +12,7 @@ charset = utf-8-bom
 indent_style = tab
 #indent_size = 4
 
-[*.{csproj,vbproj}]
+[*.{csproj,vbproj,props,targets}]
 charset = utf-8
 indent_style = space
 indent_size = 2
