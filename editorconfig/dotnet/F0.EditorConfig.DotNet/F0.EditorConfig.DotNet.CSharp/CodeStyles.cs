@@ -32,14 +32,14 @@ namespace F0.EditorConfig.DotNet.CSharp
 
 		private void Display()
 		{
-			throw new NotImplementedException();
+			Console.WriteLine(capacity);
 		}
 
 		public event ElapsedEventHandler Elapsed;
 
 		private void Handler(object sender, ElapsedEventArgs e)
 		{
-			throw new NotImplementedException();
+			Elapsed?.Invoke(sender, e);
 		}
 	}
 
@@ -56,9 +56,14 @@ namespace F0.EditorConfig.DotNet.CSharp
 			Console.WriteLine(local);
 		}
 
-		private void Method(int value)
+		internal void Method(int value)
 		{
 			_member = value;
+		}
+
+		internal void Method()
+		{
+			Console.WriteLine(_member);
 		}
 	}
 
@@ -67,38 +72,66 @@ namespace F0.EditorConfig.DotNet.CSharp
 		// dotnet_style_require_accessibility_modifiers
 		private const string thisFieldIsConst = "constant";
 
-		// csharp_preferred_modifier_order
-		private static readonly int _daysInYear = 365;
+		internal class MyClass1
+		{
+			// csharp_preferred_modifier_order
+			private static readonly int _daysInYear = 365;
 
-		// dotnet_style_readonly_field
-		private readonly int _daysInWeek = 7;
+			public int Method()
+			{
+				return _daysInYear;
+			}
+		}
 
+		internal class MyClass2
+		{
+			// dotnet_style_readonly_field
+			private readonly int _daysInYear = 365;
+
+			public int Method()
+			{
+				return _daysInYear;
+			}
+		}
+
+		public ModifierPreferences()
+		{
+			Console.WriteLine(thisFieldIsConst);
+		}
 	}
 
 	internal class ParenthesesPreferences
 	{
-		public void Method(int a, int b, int c)
+		public int Method(int a, int b, int c)
 		{
 			// dotnet_style_parentheses_in_arithmetic_binary_operators
 			int v = a + (b * c);
+
+			return v;
 		}
 
-		public void Method(bool a, bool b, bool c)
+		public bool Method(bool a, bool b, bool c)
 		{
 			// dotnet_style_parentheses_in_other_binary_operators
 			bool v = a || (b && c);
+
+			return v;
 		}
 
-		public void Method(dynamic a)
+		public dynamic Method(dynamic a)
 		{
 			// dotnet_style_parentheses_in_other_operators
 			dynamic v = a.b.Length;
+
+			return v;
 		}
 
-		public void Method(int a, int b, int c, int d)
+		public bool Method(int a, int b, int c, int d)
 		{
 			// dotnet_style_parentheses_in_relational_binary_operators
 			bool v = (a < b) == (c > d);
+
+			return v;
 		}
 	}
 
@@ -122,22 +155,29 @@ namespace F0.EditorConfig.DotNet.CSharp
 			// dotnet_style_prefer_inferred_anonymous_type_member_names
 			var anon = new { age, name };
 
-			Console.WriteLine(tuple);
+			Console.WriteLine($"{c}{list}{tuple}{anon}{Age++}");
 		}
 
 		// dotnet_style_prefer_auto_properties
 		private int Age { get; }
 
-		public string Method(object value, bool expr)
+		public void Method(object value)
 		{
 			// dotnet_style_prefer_is_null_check_over_reference_equality_method
 			if (value is null)
 			{
-				return null;
+				return;
 			}
 
+			throw new InvalidOperationException();
+		}
+
+		public string Method(bool expr)
+		{
 			// dotnet_style_prefer_conditional_expression_over_assignment
 			string s = expr ? "hello" : "world";
+
+			Console.WriteLine(s);
 
 			// dotnet_style_prefer_conditional_expression_over_return
 			return expr ? "hello" : "world";
@@ -157,21 +197,25 @@ namespace F0.EditorConfig.DotNet.CSharp
 			throw new NotImplementedException();
 		}
 
-		private readonly int age;
+		private readonly int age = 0;
 	}
 
 	internal class NullCheckingPreferences
 	{
-		public NullCheckingPreferences(object x, object y)
+		public object Method(object x, object y)
 		{
-			// dotnet_style_coalesce_expression = true
+			// dotnet_style_coalesce_expression
 			object v = x ?? y;
+
+			return v;
 		}
 
-		public NullCheckingPreferences(object o)
+		public object Method(object o)
 		{
-			// dotnet_style_null_propagation = true
+			// dotnet_style_null_propagation
 			string v = o?.ToString();
+
+			return v;
 		}
 	}
 
@@ -188,7 +232,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 			// csharp_style_var_elsewhere
 			bool f = Init();
 
-			Console.WriteLine(x);
+			Console.WriteLine($"{x}{obj}{f}");
 		}
 
 		private class Customer
@@ -209,7 +253,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		// csharp_style_expression_bodied_methods
 		public int GetAge() { return Age; }
 
-		private class Customer
+		internal class Customer
 		{
 			// csharp_style_expression_bodied_constructors
 			public Customer(int age) { Age = age; }
@@ -234,21 +278,21 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 
 		// csharp_style_expression_bodied_properties
-		public int Age => _age + 0;
+		public int Age => _age;
 
 		// csharp_style_expression_bodied_indexers
 		public T this[int i] => _values[i];
 
-		private class Person
+		internal class Person
 		{
 			// csharp_style_expression_bodied_accessors
-			public int Age { get => _age; set => _age = value - 0; }
+			public int Age { get => _age; set => _age = value; }
 
-			private int _age;
+			private dynamic _age;
 		}
 
-		private readonly int _age;
-		private readonly T[] _values;
+		internal readonly int _age = 0;
+		private readonly T[] _values = null;
 	}
 
 	internal class PatternMatching
@@ -257,11 +301,15 @@ namespace F0.EditorConfig.DotNet.CSharp
 		{
 			// csharp_style_pattern_matching_over_is_with_cast_check
 			if (o is int i)
-			{ }
+			{
+				Console.WriteLine(i);
+			}
 
 			// csharp_style_pattern_matching_over_as_with_null_check
 			if (o is string s)
-			{ }
+			{
+				Console.WriteLine(s);
+			}
 		}
 	}
 
@@ -271,19 +319,24 @@ namespace F0.EditorConfig.DotNet.CSharp
 		{
 			// csharp_style_inlined_variable_declaration
 			if (Int32.TryParse(value, out int i))
-			{ }
+			{
+				Console.WriteLine(i);
+			}
 		}
 	}
 
-	internal class ExpressionLevelPreferences<T>
+	internal class CSharpExpressionLevelPreferences
 	{
 		// csharp_prefer_simple_default_expression
-		private void DoWork(CancellationToken cancellationToken = default) { }
+		internal void DoWork(CancellationToken cancellationToken = default)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+		}
 	}
 
-	internal class NullCheckingPreferences<T>
+	internal class CSharpNullCheckingPreferences
 	{
-		public NullCheckingPreferences(string s, Action<object> func, object args)
+		public CSharpNullCheckingPreferences(string s, Action<object> func, object args)
 		{
 			// csharp_style_throw_expression
 			this.s = s ?? throw new ArgumentNullException(nameof(s));
@@ -293,6 +346,11 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 
 		private readonly string s;
+
+		internal string Method()
+		{
+			return s;
+		}
 	}
 
 	internal class CodeBlockPreferences

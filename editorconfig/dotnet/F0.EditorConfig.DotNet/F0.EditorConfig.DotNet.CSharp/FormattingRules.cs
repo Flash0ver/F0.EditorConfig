@@ -29,55 +29,58 @@ namespace F0.EditorConfig.DotNet.CSharp
 	internal class NewlineOptions
 	{
 		// csharp_new_line_before_open_brace
-		private void MyMethod()
+		internal void MyMethod()
 		{
 			if (true)
 			{
-
+				throw new InvalidOperationException();
 			}
 		}
 
-		public NewlineOptions(bool boolean, IEnumerable<int> e)
+		public NewlineOptions(bool boolean)
 		{
 			// csharp_new_line_before_else
 			if (boolean)
 			{
-
+				Console.WriteLine();
 			}
 			else
 			{
-
+				throw new InvalidOperationException();
 			}
 
 			// csharp_new_line_before_catch
 			try
 			{
-				throw new Exception();
+				throw new InvalidOperationException();
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				ExceptionDispatchInfo.Capture(ex).Throw();
+				ExceptionDispatchInfo.Capture(e).Throw();
 			}
 
 			// csharp_new_line_before_finally
 			try
 			{
-				throw new Exception();
+				throw new InvalidOperationException();
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				ExceptionDispatchInfo.Capture(ex).Throw();
+				ExceptionDispatchInfo.Capture(e).Throw();
 			}
 			finally
 			{
 				Console.WriteLine();
 			}
+		}
 
+		internal void Method(IEnumerable<int> e)
+		{
 			// csharp_new_line_before_members_in_object_initializers
-			var z = new A()
+			var z = new C()
 			{
-				B = 3,
-				C = 4
+				A = 3,
+				B = 4
 			};
 
 
@@ -92,19 +95,21 @@ namespace F0.EditorConfig.DotNet.CSharp
 			IEnumerable<int> q = from a in e
 								 from b in e
 								 select a * b;
+
+			Console.WriteLine($"{z}{y}{q}");
 		}
 
-		private class A
+		private class C
 		{
-			public A()
+			public C()
 			{
 			}
 
-			public int B
+			public int A
 			{
 				get; set;
 			}
-			public int C
+			public int B
 			{
 				get; set;
 			}
@@ -132,7 +137,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 
 		// csharp_indent_labels
-		private class C
+		internal class C
 		{
 			private string MyMethod(bool boolean)
 			{
@@ -142,6 +147,11 @@ namespace F0.EditorConfig.DotNet.CSharp
 				}
 			error:
 				throw new Exception();
+			}
+
+			public C()
+			{
+				MyMethod(true);
 			}
 		}
 
@@ -163,12 +173,18 @@ namespace F0.EditorConfig.DotNet.CSharp
 			// csharp_space_after_keywords_in_control_flow_statements
 			for (int i = 0; i < x; i++)
 			{
+				Console.WriteLine(i);
 			}
 
 			// csharp_space_between_parentheses
 			for (int i = 0; i < 10; i++)
 			{
+				Console.WriteLine(i);
 			}
+			long z = (x * y) - ((y - x) * 3);
+			int w = (int)x;
+
+			Console.WriteLine($"{y}{z}{w}");
 		}
 
 		// csharp_space_before_colon_in_inheritance_clause
@@ -178,20 +194,21 @@ namespace F0.EditorConfig.DotNet.CSharp
 
 		}
 
-		private class C : I
+		internal class C : I
 		{
 
 		}
 
-		private int Method(int x, int y)
+		internal int Method(int x, int y)
 		{
 			// csharp_space_around_binary_operators
 			return x * (x - y);
 		}
 
 		// csharp_space_between_method_declaration_parameter_list_parentheses
-		private void Bark(int x)
+		internal void Bark(int x)
 		{
+			Console.WriteLine(x);
 		}
 
 
@@ -208,15 +225,10 @@ namespace F0.EditorConfig.DotNet.CSharp
 			Goo();
 		}
 
-		private void Method(int argument, long x, long y)
+		internal void Method(int argument)
 		{
 			// csharp_space_between_method_call_parameter_list_parentheses
 			MyMethod(argument);
-
-			long z = (x * y) - ((y - x) * 3);
-
-			int w = (int)x;
-
 		}
 
 
@@ -226,9 +238,9 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
-	internal class WrappingOptions
+	internal class WrapOptions
 	{
-		public WrappingOptions()
+		public WrapOptions()
 		{
 			//csharp_preserve_single_line_statements
 			int i = 0;
