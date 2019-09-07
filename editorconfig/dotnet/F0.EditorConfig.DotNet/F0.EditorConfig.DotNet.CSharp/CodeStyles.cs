@@ -45,6 +45,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal class LanguageKeywordsInsteadOfFrameworkTypeNamesForTypeReferences
 	{
 		// dotnet_style_predefined_type_for_locals_parameters_members
@@ -53,7 +54,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		public LanguageKeywordsInsteadOfFrameworkTypeNamesForTypeReferences()
 		{
 			// dotnet_style_predefined_type_for_member_access
-			int local = Int32.MaxValue;
+			var local = Int32.MaxValue;
 
 			Console.WriteLine(local);
 		}
@@ -102,12 +103,13 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal class ParenthesesPreferences
 	{
 		public int Method(int a, int b, int c)
 		{
 			// dotnet_style_parentheses_in_arithmetic_binary_operators
-			int v = a + (b * c);
+			var v = a + (b * c);
 
 			return v;
 		}
@@ -115,7 +117,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		public bool Method(bool a, bool b, bool c)
 		{
 			// dotnet_style_parentheses_in_other_binary_operators
-			bool v = a || (b && c);
+			var v = a || (b && c);
 
 			return v;
 		}
@@ -123,7 +125,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		public dynamic Method(dynamic a)
 		{
 			// dotnet_style_parentheses_in_other_operators
-			dynamic v = a.b.Length;
+			var v = a.b.Length;
 
 			return v;
 		}
@@ -131,12 +133,13 @@ namespace F0.EditorConfig.DotNet.CSharp
 		public bool Method(int a, int b, int c, int d)
 		{
 			// dotnet_style_parentheses_in_relational_binary_operators
-			bool v = (a < b) == (c > d);
+			var v = (a < b) == (c > d);
 
 			return v;
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal class ExpressionLevelPreferences
 	{
 		public ExpressionLevelPreferences()
@@ -149,10 +152,10 @@ namespace F0.EditorConfig.DotNet.CSharp
 
 			// dotnet_style_explicit_tuple_names
 			(string name, int age) customer = GetCustomer();
-			string name = customer.name;
+			var name = customer.name;
 
 			// dotnet_style_prefer_inferred_tuple_names
-			(int age, string name) tuple = (age, name);
+			var tuple = (age, name);
 
 			// dotnet_style_prefer_inferred_anonymous_type_member_names
 			var anon = new { age, name };
@@ -170,8 +173,6 @@ namespace F0.EditorConfig.DotNet.CSharp
 			{
 				return;
 			}
-
-			throw new InvalidOperationException();
 		}
 
 		public string Method(bool expr)
@@ -207,15 +208,16 @@ namespace F0.EditorConfig.DotNet.CSharp
 			throw new NotImplementedException();
 		}
 
-		private readonly int age = 0;
+		private readonly int age = default;
 	}
 
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal class NullCheckingPreferences
 	{
 		public object Method(object x, object y)
 		{
 			// dotnet_style_coalesce_expression
-			object v = x ?? y;
+			var v = x ?? y;
 
 			return v;
 		}
@@ -223,7 +225,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		public object Method(object o)
 		{
 			// dotnet_style_null_propagation
-			string v = o?.ToString();
+			var v = o?.ToString();
 
 			return v;
 		}
@@ -235,6 +237,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		public int GetNum() { return 1; }
 	}
 
+	[SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
 	internal class ImplicitAndExplicitTypes
 	{
 		public ImplicitAndExplicitTypes()
@@ -246,7 +249,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 			var obj = new Customer();
 
 			// csharp_style_var_elsewhere
-			bool f = Init();
+			bool f = this.Init();
 
 			Console.WriteLine($"{x}{obj}{f}");
 		}
@@ -264,10 +267,11 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
 	internal class ExpressionBodiedMembers<T>
 	{
 		// csharp_style_expression_bodied_methods
-		public int GetAge() { return Age; }
+		public int GetAge() { return this.Age; }
 
 		internal class Customer
 		{
@@ -307,8 +311,8 @@ namespace F0.EditorConfig.DotNet.CSharp
 			private dynamic _age;
 		}
 
-		internal readonly int _age = 0;
-		private readonly T[] _values = null;
+		internal readonly int _age = default;
+		private readonly T[] _values = default;
 
 		[SuppressMessage("Style", "IDE0039:Use local function", Justification = "<Pending>")]
 		internal Func<int, int> Method()
@@ -348,12 +352,13 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0049:Use framework type", Justification = "<Pending>")]
 	internal class InlinedVariableDeclarations
 	{
 		public InlinedVariableDeclarations(string value)
 		{
 			// csharp_style_inlined_variable_declaration
-			if (Int32.TryParse(value, out int i))
+			if (int.TryParse(value, out int i))
 			{
 				Console.WriteLine(i);
 			}
@@ -388,13 +393,14 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
 	internal class CodeBlockPreferences
 	{
 		public CodeBlockPreferences(bool test)
 		{
 			// csharp_prefer_braces
 			if (test)
-			{ Display(); }
+			{ this.Display(); }
 		}
 
 		private void Display()
@@ -403,6 +409,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal class UnusedValuePreferences
 	{
 		public UnusedValuePreferences()
@@ -411,20 +418,22 @@ namespace F0.EditorConfig.DotNet.CSharp
 			_ = System.Convert.ToInt32("35");
 		}
 
+
 		// csharp_style_unused_value_assignment_preference
 		internal int GetCount(Dictionary<string, int> wordCount, string searchWord)
 		{
-			_ = wordCount.TryGetValue(searchWord, out int count);
+			_ = wordCount.TryGetValue(searchWord, out var count);
 			return count;
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal class MiscellaneousPreferences
 	{
 		public MiscellaneousPreferences()
 		{
 			// csharp_style_deconstructed_variable_declaration
-			(string name, int age) = GetPersonTuple();
+			var (name, age) = GetPersonTuple();
 			Console.WriteLine($"{name} {age}");
 
 			(int x, int y) = GetPointTuple();

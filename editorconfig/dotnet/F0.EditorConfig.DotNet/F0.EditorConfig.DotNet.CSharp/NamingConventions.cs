@@ -9,7 +9,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 	internal class AsynchronousMethodsMustEndInAsync
 	{
 		// async_methods_end_in_async
-		private async void MethodAsync()
+		internal async void MethodAsync()
 		{
 			await Task.Yield();
 		}

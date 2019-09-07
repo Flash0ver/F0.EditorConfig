@@ -28,6 +28,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal class NewlineOptions
 	{
 		// csharp_new_line_before_open_brace
@@ -94,9 +95,9 @@ namespace F0.EditorConfig.DotNet.CSharp
 			};
 
 			// csharp_new_line_between_query_expression_clauses
-			IEnumerable<int> q = from a in e
-								 from b in e
-								 select a * b;
+			var q = from a in e
+					from b in e
+					select a * b;
 
 			Console.WriteLine($"{z}{y}{q}");
 		}
@@ -185,6 +186,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
 	internal class SpacingOptions
 	{
@@ -204,7 +206,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 			{
 				Console.WriteLine(i);
 			}
-			long z = (x * y) - ((y - x) * 3);
+			var z = (x * y) - ((y - x) * 3);
 			int w = (int)x;
 
 			Console.WriteLine($"{y}{z}{w}");
