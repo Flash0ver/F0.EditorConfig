@@ -1,6 +1,8 @@
 ﻿// dotnet_sort_system_directives_first
+// dotnet_separate_import_directive_groups
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 	{
 	}
 
-	internal class OrganizeUsings
+	internal class OrganizeUsingDirectives
 	{
 		public async Task GetGitHubUserInfoAsync()
 		{
@@ -151,7 +153,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 
 			public C()
 			{
-				MyMethod(true);
+				_ = MyMethod(true);
 			}
 		}
 
@@ -161,8 +163,29 @@ namespace F0.EditorConfig.DotNet.CSharp
 			Green,
 			Blue
 		}
+
+		// csharp_indent_block_contents
+		// csharp_indent_braces
+		internal static void Hello()
+		{
+			Console.WriteLine("Hello");
+		}
+
+		internal void Method(Color c)
+		{
+			switch (c)
+			{
+				// csharp_indent_case_contents_when_block
+				case 0:
+				{
+					Console.WriteLine("Hello");
+					break;
+				}
+			}
+		}
 	}
 
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
 	internal class SpacingOptions
 	{
 		public SpacingOptions(long x)
@@ -225,16 +248,50 @@ namespace F0.EditorConfig.DotNet.CSharp
 			Goo();
 		}
 
+		// csharp_space_between_method_declaration_name_and_open_parenthesis
+		internal void M() { }
+
 		internal void Method(int argument)
 		{
 			// csharp_space_between_method_call_parameter_list_parentheses
 			MyMethod(argument);
 		}
 
+		[SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
+		internal void MethodOne()
+		{
+			// csharp_space_after_comma
+			// csharp_space_before_comma
+			int[] x = new int[] { 1, 2, 3, 4, 5 };
+
+			// csharp_space_after_dot
+			// csharp_space_before_dot
+			this.Goo();
+
+			// csharp_space_after_semicolon_in_for_statement
+			// csharp_space_before_semicolon_in_for_statement
+			for (int i = 0; i < x.Length; i++)
+			{ }
+		}
+
+		internal void MethodTwo()
+		{
+			// csharp_space_around_declaration_statements
+			int x = 0;
+
+			// csharp_space_before_open_square_brackets
+			// csharp_space_between_empty_square_brackets
+			int[] numbers = new int[] { 1, 2, 3, 4, 5 };
+
+			// csharp_space_between_square_brackets
+			int index = numbers[0];
+
+			Console.WriteLine($"{x}{index}");
+		}
 
 		private void MyMethod(object argument)
 		{
-			throw new NotImplementedException();
+			throw new ArgumentException(argument.ToString(), nameof(argument));
 		}
 	}
 

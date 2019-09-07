@@ -1,5 +1,7 @@
-﻿using System;
+﻿// csharp_using_directive_placement
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Timers;
 
@@ -183,6 +185,14 @@ namespace F0.EditorConfig.DotNet.CSharp
 			return expr ? "hello" : "world";
 		}
 
+		public int Method(int x)
+		{
+			// dotnet_style_prefer_compound_assignment
+			x += 1;
+
+			return x;
+		}
+
 		private class Customer
 		{
 			public Customer()
@@ -217,6 +227,12 @@ namespace F0.EditorConfig.DotNet.CSharp
 
 			return v;
 		}
+	}
+
+	internal class ParameterPreferences
+	{
+		// dotnet_code_quality_unused_parameters
+		public int GetNum() { return 1; }
 	}
 
 	internal class ImplicitAndExplicitTypes
@@ -293,6 +309,25 @@ namespace F0.EditorConfig.DotNet.CSharp
 
 		internal readonly int _age = 0;
 		private readonly T[] _values = null;
+
+		[SuppressMessage("Style", "IDE0039:Use local function", Justification = "<Pending>")]
+		internal Func<int, int> Method()
+		{
+			// csharp_style_expression_bodied_lambdas
+			Func<int, int> square = x => x * x;
+
+			return square;
+		}
+
+		// csharp_style_expression_bodied_local_functions
+		internal void M()
+		{
+			Hello();
+			void Hello()
+			{
+				Console.WriteLine("Hello");
+			}
+		}
 	}
 
 	internal class PatternMatching
@@ -365,6 +400,22 @@ namespace F0.EditorConfig.DotNet.CSharp
 		private void Display()
 		{
 			throw new NotImplementedException();
+		}
+	}
+
+	internal class UnusedValuePreferences
+	{
+		public UnusedValuePreferences()
+		{
+			// csharp_style_unused_value_expression_statement_preference
+			_ = System.Convert.ToInt32("35");
+		}
+
+		// csharp_style_unused_value_assignment_preference
+		internal int GetCount(Dictionary<string, int> wordCount, string searchWord)
+		{
+			_ = wordCount.TryGetValue(searchWord, out int count);
+			return count;
 		}
 	}
 
