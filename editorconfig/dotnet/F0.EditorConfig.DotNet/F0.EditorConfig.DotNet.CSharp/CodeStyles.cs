@@ -268,6 +268,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 	}
 
 	[SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
+	[SuppressMessage("Style", "IDE0062:Make local function 'static'", Justification = "<Pending>")]
 	internal class ExpressionBodiedMembers<T>
 	{
 		// csharp_style_expression_bodied_methods
@@ -322,6 +323,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 
 			return square;
 		}
+
 
 		// csharp_style_expression_bodied_local_functions
 		internal void M()
@@ -427,6 +429,22 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	internal class IndexAndRangePreferences
+	{
+		[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
+		[SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]
+		internal static void Method()
+		{
+			// csharp_style_prefer_index_operator
+			string[] names = { "Archimedes", "Pythagoras", "Euclid" };
+			var index = names[^1];
+
+			// csharp_style_prefer_range_operator
+			string sentence = "the quick brown fox";
+			var sub = sentence[0..^4];
+		}
+	}
+
 	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal class MiscellaneousPreferences
 	{
@@ -450,6 +468,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 			return (1, 2);
 		}
 
+		[SuppressMessage("Style", "IDE0062:Make local function 'static'", Justification = "<Pending>")]
 		public int Fibonacci(int value)
 		{
 			return fibonacci(value);
@@ -459,6 +478,33 @@ namespace F0.EditorConfig.DotNet.CSharp
 			{
 				return n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
 			}
+		}
+
+		// csharp_prefer_static_local_function
+		internal void M()
+		{
+			Hello();
+			static void Hello()
+			{
+				Console.WriteLine("Hello");
+			}
+		}
+
+		internal static void Method(IDisposable b)
+		{
+			// csharp_prefer_simple_using_statement
+			using var a = b;
+		}
+
+		internal static int Method(int x)
+		{
+			// csharp_style_prefer_switch_expression
+			return x switch
+			{
+				1 => 1 * 1,
+				2 => 2 * 2,
+				_ => 0,
+			};
 		}
 	}
 }
