@@ -1,4 +1,4 @@
-﻿// dotnet_sort_system_directives_first
+// dotnet_sort_system_directives_first
 // dotnet_separate_import_directive_groups
 using System;
 using System.Collections.Generic;

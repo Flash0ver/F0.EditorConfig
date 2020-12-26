@@ -1,4 +1,4 @@
-﻿// csharp_using_directive_placement
+// csharp_using_directive_placement
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
