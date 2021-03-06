@@ -1,3 +1,4 @@
+// file_header_template
 // csharp_using_directive_placement
 using System;
 using System.Collections.Generic;
@@ -194,6 +195,23 @@ namespace F0.EditorConfig.DotNet.CSharp
 			return x;
 		}
 
+		public string Method(float someValue)
+		{
+			// dotnet_style_prefer_simplified_interpolation
+			var str = $"prefix {someValue} suffix";
+
+			return str;
+		}
+
+		public bool Method()
+		{
+			// dotnet_style_prefer_simplified_boolean_expressions
+			var result1 = M1() && M2();
+			var result2 = M1() || M2();
+
+			return result1 && result2;
+		}
+
 		private class Customer
 		{
 			public Customer()
@@ -209,6 +227,16 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 
 		private readonly int age = default;
+
+		private bool M1()
+		{
+			return false;
+		}
+
+		private bool M2()
+		{
+			return false;
+		}
 	}
 
 	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
@@ -231,10 +259,13 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
+	[SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
 	internal class ParameterPreferences
 	{
 		// dotnet_code_quality_unused_parameters
-		public int GetNum() { return 1; }
+		public int GetNum1() { return 1; }
+		internal int GetNum2() { return 1; }
+		private int GetNum3() { return 1; }
 	}
 
 	[SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
@@ -336,9 +367,11 @@ namespace F0.EditorConfig.DotNet.CSharp
 		}
 	}
 
-	internal class PatternMatching
+	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
+	[SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]
+	internal class PatternMatchingPreferences
 	{
-		public PatternMatching(object o)
+		public PatternMatchingPreferences(object o)
 		{
 			// csharp_style_pattern_matching_over_is_with_cast_check
 			if (o is int i)
@@ -351,6 +384,26 @@ namespace F0.EditorConfig.DotNet.CSharp
 			{
 				Console.WriteLine(s);
 			}
+		}
+
+		public bool Method(int? i)
+		{
+			// csharp_style_prefer_pattern_matching
+			var x = i is default(int) or > (default(int));
+
+			return x;
+		}
+
+		public bool Method(object o)
+		{
+			// csharp_style_prefer_not_pattern
+			var y = o is not C c;
+
+			return y;
+		}
+
+		private class C
+		{
 		}
 	}
 
@@ -432,7 +485,6 @@ namespace F0.EditorConfig.DotNet.CSharp
 	internal class IndexAndRangePreferences
 	{
 		[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
-		[SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]
 		internal static void Method()
 		{
 			// csharp_style_prefer_index_operator
@@ -480,6 +532,15 @@ namespace F0.EditorConfig.DotNet.CSharp
 			}
 		}
 
+		public bool Method()
+		{
+			// csharp_style_implicit_object_creation_when_type_is_apparent
+			C c = new();
+			C c2 = new() { Field = 0 };
+
+			return c.Equals(c2);
+		}
+
 		// csharp_prefer_static_local_function
 		internal void M()
 		{
@@ -505,6 +566,11 @@ namespace F0.EditorConfig.DotNet.CSharp
 				2 => 2 * 2,
 				_ => 0,
 			};
+		}
+
+		private class C
+		{
+			internal int Field;
 		}
 	}
 }
