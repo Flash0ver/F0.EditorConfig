@@ -21,7 +21,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 			const string userAgent = "Flash0ver";
 			const string loginName = "Flash0ver";
 
-			var github = new GitHubClient(new ProductHeaderValue(userAgent));
+			GitHubClient github = new(new ProductHeaderValue(userAgent));
 			User user = await github.User.Get(loginName);
 
 			Console.WriteLine($"{user.Followers} folks follow {loginName}!");

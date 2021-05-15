@@ -269,6 +269,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 	}
 
 	[SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
+	[SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "<Pending>")]
 	internal class ImplicitAndExplicitTypes
 	{
 		public ImplicitAndExplicitTypes()
@@ -277,7 +278,7 @@ namespace F0.EditorConfig.DotNet.CSharp
 			int x = 5;
 
 			// csharp_style_var_when_type_is_apparent
-			var obj = new Customer();
+			Customer obj = new Customer();
 
 			// csharp_style_var_elsewhere
 			bool f = this.Init();
