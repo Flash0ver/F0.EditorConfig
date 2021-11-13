@@ -129,5 +129,6 @@ csharp_preserve_single_line_blocks = true
 [*.vb]
 visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,Dim,Const,WithEvents,Widening,Narrowing,Custom,Async:suggestion
 visual_basic_style_prefer_isnot_expression = true:suggestion
+visual_basic_style_prefer_simplified_object_creation = true:suggestion
 visual_basic_style_unused_value_expression_statement_preference = unused_local_variable:suggestion
 visual_basic_style_unused_value_assignment_preference = unused_local_variable:suggestion

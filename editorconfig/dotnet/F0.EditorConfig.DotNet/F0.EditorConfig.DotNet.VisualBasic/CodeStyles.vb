@@ -21,6 +21,16 @@ Public Class PatternMatchingPreferences
 		Return y
 	End Function
 
+	' visual_basic_style_prefer_simplified_object_creation
+	Public Function Create() As Student
+		Dim x As New Student()
+
+		Return x
+	End Function
+
+	Public Class Student
+	End Class
+
 End Class
 
 Public Class UnnecessaryCode
