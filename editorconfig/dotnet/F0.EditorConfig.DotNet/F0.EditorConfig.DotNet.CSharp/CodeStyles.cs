@@ -269,7 +269,6 @@ internal class ParameterPreferences
 }
 
 [SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
-[SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "<Pending>")]
 internal class ImplicitAndExplicitTypes
 {
 	public ImplicitAndExplicitTypes()
@@ -278,7 +277,7 @@ internal class ImplicitAndExplicitTypes
 		int x = 5;
 
 		// csharp_style_var_when_type_is_apparent
-		Customer obj = new Customer();
+		var obj = new Customer();
 
 		// csharp_style_var_elsewhere
 		bool f = this.Init();
