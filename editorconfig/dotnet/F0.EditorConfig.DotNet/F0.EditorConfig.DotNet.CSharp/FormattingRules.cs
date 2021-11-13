@@ -121,6 +121,7 @@ internal class NewlineOptions
 	}
 }
 
+[SuppressMessage("Style", "IDE0022:Use expression body for methods", Justification = "<Pending>")]
 internal class IndentationOptions
 {
 	public IndentationOptions(Color c)
@@ -154,10 +155,7 @@ internal class IndentationOptions
 			throw new Exception();
 		}
 
-		public C()
-		{
-			_ = MyMethod(true);
-		}
+		public C() => _ = MyMethod(true);
 	}
 
 	public enum Color
@@ -189,6 +187,7 @@ internal class IndentationOptions
 }
 
 [SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
+[SuppressMessage("Style", "IDE0022:Use expression body for methods", Justification = "<Pending>")]
 [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
 internal class SpacingOptions
 {

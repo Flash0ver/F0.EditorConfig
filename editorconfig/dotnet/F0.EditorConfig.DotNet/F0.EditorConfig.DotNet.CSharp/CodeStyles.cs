@@ -33,17 +33,11 @@ internal class ThisQualifiers
 
 	public int ID { get; private set; }
 
-	private void Display()
-	{
-		Console.WriteLine(capacity);
-	}
+	private void Display() => Console.WriteLine(capacity);
 
 	public event ElapsedEventHandler Elapsed;
 
-	private void Handler(object sender, ElapsedEventArgs e)
-	{
-		Elapsed?.Invoke(sender, e);
-	}
+	private void Handler(object sender, ElapsedEventArgs e) => Elapsed?.Invoke(sender, e);
 }
 
 [SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
@@ -60,15 +54,9 @@ internal class LanguageKeywordsInsteadOfFrameworkTypeNamesForTypeReferences
 		Console.WriteLine(local);
 	}
 
-	internal void Method(int value)
-	{
-		_member = value;
-	}
+	internal void Method(int value) => _member = value;
 
-	internal void Method()
-	{
-		Console.WriteLine(_member);
-	}
+	internal void Method() => Console.WriteLine(_member);
 }
 
 internal class ModifierPreferences
@@ -81,10 +69,7 @@ internal class ModifierPreferences
 		// csharp_preferred_modifier_order
 		private static readonly int _daysInYear = 365;
 
-		public int Method()
-		{
-			return _daysInYear;
-		}
+		public int Method() => _daysInYear;
 	}
 
 	internal class MyClass2
@@ -92,16 +77,10 @@ internal class ModifierPreferences
 		// dotnet_style_readonly_field
 		private readonly int _daysInYear = 365;
 
-		public int Method()
-		{
-			return _daysInYear;
-		}
+		public int Method() => _daysInYear;
 	}
 
-	public ModifierPreferences()
-	{
-		Console.WriteLine(thisFieldIsConst);
-	}
+	public ModifierPreferences() => Console.WriteLine(thisFieldIsConst);
 }
 
 [SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
@@ -221,22 +200,13 @@ internal class ExpressionLevelPreferences
 		public int Age { get; set; }
 	}
 
-	private (string name, int age) GetCustomer()
-	{
-		throw new NotImplementedException();
-	}
+	private (string name, int age) GetCustomer() => throw new NotImplementedException();
 
 	private readonly int age = default;
 
-	private bool M1()
-	{
-		return false;
-	}
+	private bool M1() => false;
 
-	private bool M2()
-	{
-		return false;
-	}
+	private bool M2() => false;
 }
 
 [SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
@@ -259,6 +229,7 @@ internal class NullCheckingPreferences
 	}
 }
 
+[SuppressMessage("Style", "IDE0022:Use expression body for methods", Justification = "<Pending>")]
 [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
 internal class ParameterPreferences
 {
@@ -292,23 +263,22 @@ internal class ImplicitAndExplicitTypes
 		}
 	}
 
-	private bool Init()
-	{
-		throw new NotImplementedException();
-	}
+	private bool Init() => throw new NotImplementedException();
 }
 
 [SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
+[SuppressMessage("Style", "IDE0039:Use local function", Justification = "<Pending>")]
 [SuppressMessage("Style", "IDE0062:Make local function 'static'", Justification = "<Pending>")]
+[SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "<Pending>")]
 internal class ExpressionBodiedMembers<T>
 {
 	// csharp_style_expression_bodied_methods
-	public int GetAge() { return this.Age; }
+	public int GetAge() => this.Age;
 
 	internal class Customer
 	{
 		// csharp_style_expression_bodied_constructors
-		public Customer(int age) { Age = age; }
+		public Customer(int age) => Age = age;
 
 		public int Age { get; }
 	}
@@ -326,7 +296,7 @@ internal class ExpressionBodiedMembers<T>
 
 		// csharp_style_expression_bodied_operators
 		public static ComplexNumber operator +(ComplexNumber c1, ComplexNumber c2)
-		{ return new ComplexNumber(c1.Real + c2.Real, c1.Imaginary + c2.Imaginary); }
+			=> new ComplexNumber(c1.Real + c2.Real, c1.Imaginary + c2.Imaginary);
 	}
 
 	// csharp_style_expression_bodied_properties
@@ -346,7 +316,6 @@ internal class ExpressionBodiedMembers<T>
 	internal readonly int _age = default;
 	private readonly T[] _values = default;
 
-	[SuppressMessage("Style", "IDE0039:Use local function", Justification = "<Pending>")]
 	internal Func<int, int> Method()
 	{
 		// csharp_style_expression_bodied_lambdas
@@ -360,10 +329,7 @@ internal class ExpressionBodiedMembers<T>
 	internal void M()
 	{
 		Hello();
-		void Hello()
-		{
-			Console.WriteLine("Hello");
-		}
+		void Hello() => Console.WriteLine("Hello");
 	}
 }
 
@@ -420,6 +386,7 @@ internal class InlinedVariableDeclarations
 	}
 }
 
+[SuppressMessage("Style", "IDE0022:Use expression body for methods", Justification = "<Pending>")]
 internal class CSharpExpressionLevelPreferences
 {
 	// csharp_prefer_simple_default_expression
@@ -442,10 +409,7 @@ internal class CSharpNullCheckingPreferences
 
 	private readonly string s;
 
-	internal string Method()
-	{
-		return s;
-	}
+	internal string Method() => s;
 }
 
 [SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>")]
@@ -458,13 +422,11 @@ internal class CodeBlockPreferences
 		{ this.Display(); }
 	}
 
-	private void Display()
-	{
-		throw new NotImplementedException();
-	}
+	private void Display() => throw new NotImplementedException();
 }
 
 [SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
+[SuppressMessage("Style", "IDE0021:Use expression body for constructors", Justification = "<Pending>")]
 internal class UnusedValuePreferences
 {
 	public UnusedValuePreferences()
@@ -472,7 +434,6 @@ internal class UnusedValuePreferences
 		// csharp_style_unused_value_expression_statement_preference
 		_ = System.Convert.ToInt32("35");
 	}
-
 
 	// csharp_style_unused_value_assignment_preference
 	internal int GetCount(Dictionary<string, int> wordCount, string searchWord)
@@ -482,9 +443,9 @@ internal class UnusedValuePreferences
 	}
 }
 
+[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 internal class IndexAndRangePreferences
 {
-	[SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
 	internal static void Method()
 	{
 		// csharp_style_prefer_index_operator
@@ -498,6 +459,7 @@ internal class IndexAndRangePreferences
 }
 
 [SuppressMessage("Style", "IDE0008:Use explicit type", Justification = "<Pending>")]
+[SuppressMessage("Style", "IDE0061:Use expression body for local functions", Justification = "<Pending>")]
 internal class MiscellaneousPreferences
 {
 	public MiscellaneousPreferences()
@@ -510,15 +472,9 @@ internal class MiscellaneousPreferences
 		Console.WriteLine($"{x} {y}");
 	}
 
-	private static (string name, int age) GetPersonTuple()
-	{
-		return ("Name", 42);
-	}
+	private static (string name, int age) GetPersonTuple() => ("Name", 42);
 
-	private static (int x, int y) GetPointTuple()
-	{
-		return (1, 2);
-	}
+	private static (int x, int y) GetPointTuple() => (1, 2);
 
 	[SuppressMessage("Style", "IDE0062:Make local function 'static'", Justification = "<Pending>")]
 	public int Fibonacci(int value)
