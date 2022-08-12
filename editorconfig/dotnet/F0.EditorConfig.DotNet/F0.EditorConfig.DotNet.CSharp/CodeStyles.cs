@@ -368,6 +368,13 @@ internal class PatternMatchingPreferences
 		return y;
 	}
 
+	public record Point(int X, int Y);
+	public record Segment(Point Start, Point End);
+
+	// csharp_style_prefer_extended_property_pattern
+	public static bool IsEndOnXAxis(Segment segment) =>
+		segment is { Start.Y: 0 } or { End.Y: 0 };
+
 	private class C
 	{
 	}
@@ -398,13 +405,18 @@ internal class CSharpExpressionLevelPreferences
 
 internal class CSharpNullCheckingPreferences
 {
-	public CSharpNullCheckingPreferences(string s, Action<object> func, object args)
+	public CSharpNullCheckingPreferences(string s, Action<object> func, object args, IEnumerable<int> numbers)
 	{
 		// csharp_style_throw_expression
 		this.s = s ?? throw new ArgumentNullException(nameof(s));
 
 		// csharp_style_conditional_delegate_call
 		func?.Invoke(args);
+
+		// csharp_style_prefer_null_check_over_type_check
+		if (numbers is null)
+		{
+		}
 	}
 
 	private readonly string s;
@@ -455,6 +467,8 @@ internal class IndexAndRangePreferences
 		// csharp_style_prefer_range_operator
 		string sentence = "the quick brown fox";
 		var sub = sentence[0..^4];
+
+		Console.WriteLine($"{index} {sub}");
 	}
 }
 
@@ -481,6 +495,7 @@ internal class MiscellaneousPreferences
 	{
 		return fibonacci(value);
 
+		// csharp_style_prefer_local_over_anonymous_function
 		// csharp_style_pattern_local_over_anonymous_function
 		int fibonacci(int n)
 		{
@@ -495,6 +510,13 @@ internal class MiscellaneousPreferences
 		C c2 = new() { Field = 0 };
 
 		return c.Equals(c2);
+	}
+	
+	[SuppressMessage("Style", "IDE0022:Use expression body for methods", Justification = "<Pending>")]
+	internal void Method(List<int> numbers)
+	{
+		// csharp_style_prefer_tuple_swap
+		(numbers[1], numbers[0]) = (numbers[0], numbers[1]);
 	}
 
 	// csharp_prefer_static_local_function
