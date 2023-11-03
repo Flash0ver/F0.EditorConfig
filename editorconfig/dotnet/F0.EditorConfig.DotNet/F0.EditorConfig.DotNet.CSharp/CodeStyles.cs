@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using System.Timers;
 
@@ -511,7 +512,7 @@ internal class MiscellaneousPreferences
 
 		return c.Equals(c2);
 	}
-	
+
 	[SuppressMessage("Style", "IDE0022:Use expression body for methods", Justification = "<Pending>")]
 	internal void Method(List<int> numbers)
 	{
@@ -549,5 +550,50 @@ internal class MiscellaneousPreferences
 	private class C
 	{
 		internal int Field;
+	}
+}
+
+[SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]
+[SuppressMessage("Style", "IDE0062:Make local function 'static'", Justification = "<Pending>")]
+internal class LanguageRules
+{
+	internal void IDE0200()
+	{
+		// csharp_style_prefer_method_group_conversion
+		bool IsEven(int x) => x % 2 == 0;
+		_ = new[] { 1, 2, 3 }.Where(IsEven);
+	}
+
+	internal void IDE0220()
+	{
+		// dotnet_style_prefer_foreach_explicit_cast_in_source
+		var list = new List<object>();
+		foreach (string item in list.Cast<string>())
+		{ }
+	}
+
+	internal ReadOnlySpan<byte> IDE0230()
+	{
+		// csharp_style_prefer_utf8_string_literals
+		ReadOnlySpan<byte> _ = "ABC"u8;
+
+		return _;
+	}
+}
+
+[SuppressMessage("Style", "IDE0040:Add accessibility modifiers", Justification = "<Pending>")]
+[SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
+internal class UnnecessaryCodeRules
+{
+	// csharp_style_prefer_readonly_struct
+	readonly struct IDE0250
+	{
+		readonly int i;
+	}
+
+	struct IDE0251
+	{
+		// csharp_style_prefer_readonly_struct_member
+		readonly void M() { }
 	}
 }
